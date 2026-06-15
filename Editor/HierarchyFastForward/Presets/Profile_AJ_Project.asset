@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f1c500a66d77e4aafc7fc7cb130b86, type: 3}
+  m_Name: Profile_AJ_Project
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::KJD.Editor.HierarchyFastForward.ProjectStructureProfile
+  _profileName: Style Arnaud Jopart
+  _description: Structured under Arnaud's WorkShop
+  _targetFolders:
+  - _/ART
+  - _/ART/Materials
+  - _/ART/Models
+  - _/ART/textures
+  - _/ART/VFX
+  - _/AUDIO
+  - _/AUDIO/Music
+  - _/AUDIO/Sfx
+  - _/Prefabs
+  - _/Scenes
+  - _/Scripts
+  - _/Scripts/Gameplay
+  - _/Scripts/UI
+  - _/Scripts/Tools
+  - _/UI
+  - _/Resources
+  - _/Settings

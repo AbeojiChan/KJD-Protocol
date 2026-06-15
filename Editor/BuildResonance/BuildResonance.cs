@@ -8,8 +8,6 @@ namespace KJD.Editor.BuildResonance
     {
         private const string COMPILING_FLAG = "KJD_BuildResonance_IsCompiling";
 
-        // Les conventions de nommage absolues. 
-        // L'extension (.wav, .mp3) n'a pas d'importance pour le scanner.
         private const string SUCCESS_FILE_NAME = "KJD_Success";
         private const string ERROR_FILE_NAME = "KJD_Error";
 
@@ -44,10 +42,8 @@ namespace KJD.Editor.BuildResonance
         {
             string targetName = isSuccess ? SUCCESS_FILE_NAME : ERROR_FILE_NAME;
 
-            // Le traceur GPS : on cherche le nom strict, et on exige que ce soit un AudioClip
             string[] guids = AssetDatabase.FindAssets($"{targetName} t:AudioClip");
 
-            // Si le fichier n'existe pas, on abandonne silencieusement. Zéro erreur console.
             if (guids.Length == 0) return;
 
             string path = AssetDatabase.GUIDToAssetPath(guids[0]);
@@ -55,7 +51,6 @@ namespace KJD.Editor.BuildResonance
 
             if (clipToPlay == null) return;
 
-            // Création du haut-parleur fantôme
             GameObject audioSpeaker = new GameObject("KJD_ResonanceSpeaker");
             audioSpeaker.hideFlags = HideFlags.HideAndDontSave;
 
@@ -64,7 +59,6 @@ namespace KJD.Editor.BuildResonance
             source.volume = 1f;
             source.Play();
 
-            // Autodestruction asynchrone
             double startTime = EditorApplication.timeSinceStartup;
             float clipLength = clipToPlay.length;
 

@@ -25,7 +25,6 @@ namespace KJD.Editor.NamedropConvention
         private List<Object> _assetsToRename = new List<Object>();
         private Vector2 _scrollPosition;
 
-        // ⏪ Mémoire du dernier lot pour le Revert temporel
         private Dictionary<string, string> _lastBatchRevertData = new Dictionary<string, string>();
 
         #endregion
@@ -48,18 +47,15 @@ namespace KJD.Editor.NamedropConvention
 
         private void OnEnable()
         {
-            // 1. On lance le scanner à la recherche du nom du fichier (sans l'extension)
             string[] guids = AssetDatabase.FindAssets("logo_blt t:Texture2D");
 
             if (guids.Length > 0)
             {
-                // 2. On a trouvé ! On convertit le GUID en chemin exact, peu importe où il est
                 string realPath = AssetDatabase.GUIDToAssetPath(guids[0]);
                 _headerLogo = AssetDatabase.LoadAssetAtPath<Texture2D>(realPath);
             }
             else
             {
-                // 3. Si l'image reste introuvable, la console va nous alerter pour qu'on sache pourquoi
                 Debug.LogWarning("<b>[Namedrop Convention]</b> ⚠️ Alerte Matrice : Impossible de trouver 'logo_blt' dans les assets ou les packages.");
             }
         }

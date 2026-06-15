@@ -10,14 +10,13 @@ namespace KJD.Editor.ColorCabinet
 
         private ColorCabinetConfig _config;
 
-        // Variables de création pour la règle actuelle
         private string _detectedName = "";
         private Color _textColor = Color.white;
         private Color _backgroundColor = new Color(0f, 0f, 0f, 0f);
         private bool _matchPrefixOnly = false;
 
         private Vector2 _scrollPosition;
-        private GUIStyle _richTextStyle; // Style mis en cache pour le texte enrichi
+        private GUIStyle _richTextStyle;
 
         #endregion
 
@@ -89,7 +88,6 @@ namespace KJD.Editor.ColorCabinet
 
         private void OnGUI()
         {
-            // Initialisation sécurisée du style de texte enrichi
             if (_richTextStyle == null)
             {
                 _richTextStyle = new GUIStyle(EditorStyles.label);
@@ -133,7 +131,6 @@ namespace KJD.Editor.ColorCabinet
                 }
                 else
                 {
-                    // CORRECTIF : Utilisation du style personnalisé avec richText = true
                     EditorGUILayout.LabelField("Élément détecté :", $"<b><color=#F7B801>{_detectedName}</color></b>", _richTextStyle);
                 }
 
@@ -181,7 +178,6 @@ namespace KJD.Editor.ColorCabinet
                     {
                         string prefixInfo = rule.m_matchPrefixOnly ? "[Préfixe]" : "[Contient]";
 
-                        // CORRECTIF : Utilisation du style personnalisé avec richText = true
                         GUILayout.Label($"{prefixInfo} <b>{rule.m_keyword}</b>", _richTextStyle);
 
                         GUILayout.Space(10);

@@ -3,8 +3,6 @@ using UnityEngine;
 
 namespace KJD.Editor.HierarchyFastForward
 {
-    // L'attribut reste ici car l'éditeur sait comment générer l'asset dans ton projet, 
-    // mais le script lui-même ne sera jamais compilé dans le jeu final.
     [CreateAssetMenu(fileName = "NewProjectProfile", menuName = "KJD/Hierarchy Fast Forward/Project Profile")]
     public class ProjectStructureProfile : ScriptableObject
     {
@@ -34,8 +32,6 @@ namespace KJD.Editor.HierarchyFastForward
 
 
         #region Main API
-
-        // Propriétés publiques en lecture seule pour que la fenêtre Editor puisse lire les données encapsulées
         public string ProfileName => _profileName;
         public string Description => _description;
         public List<string> TargetFolders => _targetFolders;

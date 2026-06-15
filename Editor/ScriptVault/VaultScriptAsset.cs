@@ -31,7 +31,7 @@ namespace KJD.Editor.ScriptVault
 
         [Header("Source Code (Inerte)")]
         [Tooltip("Glisse le script sauvegardé au format .txt ici.")]
-        [SerializeField] private TextAsset _sourceTextAsset; // Remplacé MonoScript par TextAsset
+        [SerializeField] private TextAsset _sourceTextAsset;
 
         [Tooltip("Nom complet du fichier cible avec son extension .cs (ex: SpaceEventArgs.cs)")]
         [SerializeField] private string _targetFileName;

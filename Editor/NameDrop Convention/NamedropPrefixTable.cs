@@ -18,9 +18,6 @@ namespace KJD.Editor.NamedropConvention
         [Header("Règles de Préfixes par Type")]
         public List<PrefixRule> Rules = new List<PrefixRule>();
 
-        /// <summary>
-        /// Cherche le préfixe correspondant au type de l'objet.
-        /// </summary>
         public string GetPrefixForObject(Object obj)
         {
             if (obj == null) return "";
@@ -34,7 +31,7 @@ namespace KJD.Editor.NamedropConvention
                     return rule.m_prefix;
                 }
             }
-            return ""; // Aucun préfixe trouvé
+            return "";
         }
     }
 }

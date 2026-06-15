@@ -93,28 +93,22 @@ namespace KJD.Editor.ColorCabinet
 
         private static void DrawCustomRow(string name, Rect rect, ColorRule rule, bool isProjectWindow)
         {
-            // Décalage standard pour s'aligner après l'icône d'Unity
             float xOffset = 18f;
 
-            // 1. Préparer le style de texte (Dossiers/Objets en Gras)
             GUIStyle customStyle = new GUIStyle(EditorStyles.label);
             customStyle.normal.textColor = rule.m_textColor;
             customStyle.fontStyle = FontStyle.Bold;
 
-            // 2. CALCUL MAGIQUE : Mesurer la taille exacte du texte en pixels
             Vector2 textSize = customStyle.CalcSize(new GUIContent(name));
 
-            // On crée un rectangle ajusté à la largeur du mot (+ 4px de marge pour respirer)
             float textWidth = textSize.x + 4f;
 
-            // 3. Dessiner le fond (uniquement derrière le texte)
             if (rule.m_backgroundColor.a > 0f)
             {
                 Rect bgRect = new Rect(rect.x + xOffset, rect.y, textWidth, rect.height);
                 EditorGUI.DrawRect(bgRect, rule.m_backgroundColor);
             }
 
-            // 4. Dessiner le texte coloré
             Rect textRect = new Rect(rect.x + xOffset, rect.y, textWidth, rect.height);
             EditorGUI.LabelField(textRect, name, customStyle);
         }

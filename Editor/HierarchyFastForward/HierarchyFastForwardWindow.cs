@@ -41,8 +41,6 @@ namespace KJD.Editor.HierarchyFastForward
         private void RefreshAvailableProfiles()
         {
             _availableProfiles.Clear();
-
-            // On cherche tous les ScriptableObjects de type ProjectStructureProfile dans le projet ET dans les packages
             string[] guids = AssetDatabase.FindAssets("t:ProjectStructureProfile");
 
             List<string> names = new List<string>();
@@ -55,15 +53,12 @@ namespace KJD.Editor.HierarchyFastForward
                 if (profile != null)
                 {
                     _availableProfiles.Add(profile);
-                    // On affiche le nom du profil + une indication si c'est dans le Package
                     string origin = path.StartsWith("Packages/") ? "[Package]" : "[Local]";
                     names.Add($"{origin} {profile.ProfileName}");
                 }
             }
 
             _profileNames = names.ToArray();
-
-            // Sécurité si l'index est hors limites après rafraîchissement
             if (_selectedProfileIndex >= _availableProfiles.Count)
             {
                 _selectedProfileIndex = 0;
@@ -80,8 +75,6 @@ namespace KJD.Editor.HierarchyFastForward
             DrawHeader();
 
             GUILayout.Space(10);
-
-            // Petit bouton de secours pour rafraîchir la liste si on crée un profil à la volée
             if (GUILayout.Button("🔄 Rafraîchir les profils dispos", GUILayout.Width(180)))
             {
                 RefreshAvailableProfiles();

@@ -1,0 +1,58 @@
+using UnityEngine;
+// ATTENTION : Ne pas oublier d'ajouter ce namespace en haut !
+using UnityEngine.InputSystem;
+
+public class GameSpeedController : MonoBehaviour
+{
+    private float speedStep = 0.5f;
+    private float maxSpeed = 5.0f;
+    private float minSpeed = 0.2f;
+    private float defaultSpeed = 1.0f;
+
+    private void Awake()
+    {
+        Debug.Log("[Toolbox Time] Le script est prêt avec le New Input System !");
+    }
+
+    void Update()
+    {
+        // Sécurité au cas où aucun clavier n'est branché/détecté
+        if (Keyboard.current == null) return;
+
+        // 1. Rotation Gauche (Volume Down -> PgUp)
+        if (Keyboard.current.pageUpKey.wasPressedThisFrame)
+        {
+            DecreaseSpeed();
+        }
+
+        // 2. Rotation Droite (Volume Up -> PgDn)
+        if (Keyboard.current.pageDownKey.wasPressedThisFrame)
+        {
+            IncreaseSpeed();
+        }
+
+        // 3. Clic Potard (Volume Mute -> End)
+        if (Keyboard.current.endKey.wasPressedThisFrame)
+        {
+            ResetSpeed();
+        }
+    }
+
+    private void IncreaseSpeed()
+    {
+        Time.timeScale = Mathf.Min(Time.timeScale + speedStep, maxSpeed);
+        Debug.Log($"[Toolbox Time] Vitesse : {Time.timeScale}x");
+    }
+
+    private void DecreaseSpeed()
+    {
+        Time.timeScale = Mathf.Max(Time.timeScale - speedStep, minSpeed);
+        Debug.Log($"[Toolbox Time] Vitesse : {Time.timeScale}x");
+    }
+
+    private void ResetSpeed()
+    {
+        Time.timeScale = defaultSpeed;
+        Debug.Log("[Toolbox Time] Reset -> 1.0x");
+    }
+}

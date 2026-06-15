@@ -10,7 +10,7 @@ namespace KJD.Editor.FeatureGenerator
 
         private string _featureName = "NewFeature";
         private bool _includeManagerPlaceholder = true;
-        private bool _isEditorOnlyAssembly = false; // Nouvelle option pour définir la cible de l'assembly
+        private bool _isEditorOnlyAssembly = false;
 
         #endregion
 
@@ -36,10 +36,8 @@ namespace KJD.Editor.FeatureGenerator
 
             GUILayout.Space(15);
 
-            // Saisie du nom de la Feature
             _featureName = EditorGUILayout.TextField("Nom de la Feature :", _featureName);
 
-            // Options de configuration
             _includeManagerPlaceholder = EditorGUILayout.Toggle("Créer script d'init (Src)", _includeManagerPlaceholder);
             _isEditorOnlyAssembly = EditorGUILayout.Toggle("Assembly destiné à l'Editor ?", _isEditorOnlyAssembly);
 
@@ -86,22 +84,19 @@ namespace KJD.Editor.FeatureGenerator
             Directory.CreateDirectory(runtimePath);
             Directory.CreateDirectory(srcPath);
 
-            // Configuration des variables de l'Assembly
             string asmdefName = $"KJD.Game.{_featureName}";
             string asmdefFileName = $"{asmdefName}.asmdef";
             string asmdefFullPath = Path.Combine(runtimePath, asmdefFileName);
 
             if (!File.Exists(asmdefFullPath))
             {
-                // Gestion dynamique de la plateforme cible (Editor uniquement ou cross-platform)
                 string includePlatformsValue = _isEditorOnlyAssembly ? "[\n        \"Editor\"\n    ]" : "[]";
 
-                // Construction du JSON avec le Root Namespace injecté automatiquement
                 string asmdefContent = "{\n" +
                                        $"    \"name\": \"{asmdefName}\",\n" +
-                                       $"    \"rootNamespace\": \"{asmdefName}\",\n" + // Rempli automatiquement ici !
+                                       $"    \"rootNamespace\": \"{asmdefName}\",\n" +
                                        $"    \"references\": [],\n" +
-                                       $"    \"includePlatforms\": {includePlatformsValue},\n" + // Applique la contrainte Editor si cochée
+                                       $"    \"includePlatforms\": {includePlatformsValue},\n" + 
                                        "    \"excludePlatforms\": [],\n" +
                                        "    \"allowUnsafeCode\": false,\n" +
                                        "    \"overrideReferences\": false,\n" +
@@ -115,7 +110,6 @@ namespace KJD.Editor.FeatureGenerator
                 File.WriteAllText(asmdefFullPath, asmdefContent);
             }
 
-            // Génération du script d'init dans Src
             if (_includeManagerPlaceholder)
             {
                 string scriptFileName = $"{_featureName}Manager.cs";

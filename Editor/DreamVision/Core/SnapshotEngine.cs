@@ -34,13 +34,12 @@ namespace KJD.DreamVision.Core
             string clonedScenePath = Path.Combine(nodeVaultPath, activeScene.name + "_clone.unity");
             File.Copy(originalScenePath, clonedScenePath, true);
 
-            // --- CHANGEMENT ICI : On récupère le vrai parent ! ---
             string parentGUID = TimelineVault.GetActiveNodeGUID();
 
             SnapshotMetadata crystal = new SnapshotMetadata
             {
                 NodeGUID = snapshotID,
-                ParentGUID = parentGUID, // Lié à l'histoire !
+                ParentGUID = parentGUID,
                 BranchName = string.IsNullOrEmpty(branchName) ? "Idée sans nom" : branchName,
                 TimestampTicks = DateTime.Now.Ticks,
                 Tags = new string[] { "WIP" },
@@ -50,7 +49,6 @@ namespace KJD.DreamVision.Core
 
             TimelineVault.SaveSnapshotMetadata(crystal);
 
-            // Le nouveau nœud devient le nœud actif
             TimelineVault.SaveActiveNodeGUID(snapshotID);
 
             Debug.Log($"[DreamVision] Nouvelle branche générée : {crystal.BranchName}");
@@ -77,13 +75,10 @@ namespace KJD.DreamVision.Core
             AssetDatabase.Refresh();
             EditorSceneManager.OpenScene(targetPath);
 
-            // --- CHANGEMENT ICI : On met à jour le nœud actif lors du saut ---
             TimelineVault.SaveActiveNodeGUID(crystal.NodeGUID);
 
             Debug.Log($"[DreamVision] Réalité alignée sur : {crystal.BranchName}");
         }
-
-        // Fonction utilitaire pour mettre à jour les métadonnées (Notes/Tags) depuis l'inspecteur
         public static void UpdateSnapshotMetadata(SnapshotMetadata crystal)
         {
             TimelineVault.SaveSnapshotMetadata(crystal);
