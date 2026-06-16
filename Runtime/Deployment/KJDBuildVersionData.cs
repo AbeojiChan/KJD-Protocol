@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace KJD.Framework.Deployment
 {
+    [CreateAssetMenu(fileName = "KJDBuildVersionData", menuName = "KJD/Build Data")]
     public sealed class KJDBuildVersionData : ScriptableObject
     {
         [Header("Version Metadata")]
