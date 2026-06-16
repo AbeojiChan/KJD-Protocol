@@ -132,8 +132,15 @@ namespace KJD.Framework.Deployment
 
             if (report.summary.result == UnityEditor.Build.Reporting.BuildResult.Succeeded)
             {
+                // Écriture du fichier de notes standard
                 File.WriteAllText(Path.Combine(buildPath, "release_notes.txt"), m_releaseNotes);
-                UnityEngine.Debug.Log("[KJD Framework] Automated release process compiled successfully.");
+                
+                // --- AJOUT KJD PROTOCOL : Génération du manifeste JSON ---
+                string jsonPath = Path.Combine(buildPath, "version.json");
+                string jsonContent = JsonUtility.ToJson(dataAsset, true);
+                File.WriteAllText(jsonPath, jsonContent);
+                
+                UnityEngine.Debug.Log("[KJD Framework] Automated release process compiled successfully. Manifest generated.");
                 EditorUtility.RevealInFinder(fullOutputPath);
             }
             else

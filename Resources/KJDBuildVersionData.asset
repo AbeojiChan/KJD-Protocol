@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1df4317695dcb7b4393afbc7d071835b, type: 3}
   m_Name: KJDBuildVersionData
   m_EditorClassIdentifier: KJD.Protocol.Runtime::KJD.Framework.Deployment.KJDBuildVersionData
-  m_versionTag: v1.0.0
-  m_commitHash: 1e271822
-  m_buildDate: 2026-06-16 09:37:24
+  m_versionTag: v1.0.1
+  m_commitHash: 370b677e
+  m_buildDate: 2026-06-16 09:45:01
